@@ -1,19 +1,15 @@
 import sys
-
+from day01_common import count_increasing_items
 sys.path.append("..")
 from shared.utils import load_int_list_from_file
 
 
-def get_part_one_result(items: list[int]):
-    total = 0
-    for idx in range(1, len(items)):
-        if items[idx] > items[idx - 1]:
-            total += 1
-    return total
+def get_part_one_result(file_name: str):
+    items = load_int_list_from_file(file_name)
+    result = count_increasing_items(items)
+    return result
 
 
 if __name__ == "__main__":
-    items = load_int_list_from_file("input.txt")
-    print(items)
-    result = get_part_one_result(items)
+    result = get_part_one_result("input.txt")
     print(result)
