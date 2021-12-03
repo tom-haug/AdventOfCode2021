@@ -1,4 +1,4 @@
-import day02_common as common
+from day02_common import Command, CommandType, create_command_list, issue_commands_to_submarine
 
 
 class SubmarineV2:
@@ -7,21 +7,21 @@ class SubmarineV2:
         self.depth = depth
         self.aim = aim
 
-    def issue_command(self, command: common.Command):
+    def issue_command(self, command: Command):
         match command:
-            case common.Command(command_type=common.CommandType.forward, amount=amount):
+            case Command(command_type=CommandType.forward, amount=amount):
                 self.horizontal += amount
                 self.depth += (amount * self.aim)
-            case common.Command(command_type=common.CommandType.down, amount=amount):
+            case Command(command_type=CommandType.down, amount=amount):
                 self.aim += amount
-            case common.Command(command_type=common.CommandType.up, amount=amount):
+            case Command(command_type=CommandType.up, amount=amount):
                 self.aim -= amount
 
 
 def get_part_two_result(file_name: str):
-    commands = common.create_command_list(file_name)
+    commands = create_command_list(file_name)
     submarine = SubmarineV2(0, 0, 0)
-    common.issue_commands_to_submarine(submarine, commands)
+    issue_commands_to_submarine(submarine, commands)
     result = submarine.horizontal * submarine.depth
     return result
 
