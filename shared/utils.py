@@ -2,7 +2,7 @@ import os
 import sys
 
 
-def load_int_list_from_file(file_name: str) -> list[str]:
+def load_int_list_from_file(file_name: str) -> list[int]:
     file_contents = load_text_file(file_name)
     return [int(line) for line in file_contents]
 
