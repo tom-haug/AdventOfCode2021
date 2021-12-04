@@ -1,7 +1,6 @@
 import sys
 from enum import Enum
-sys.path.append("..")
-from shared.utils import load_text_file
+from src.shared.utils import load_text_file
 
 
 class CommandType(Enum):

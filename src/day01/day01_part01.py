@@ -1,7 +1,5 @@
-import sys
 from day01_common import count_increasing_items
-sys.path.append("..")
-from shared.utils import load_int_list_from_file
+from src.shared.utils import load_int_list_from_file
 
 
 def get_part_one_result(file_name: str):

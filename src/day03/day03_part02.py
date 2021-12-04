@@ -1,9 +1,7 @@
 import pandas as pd
 import operator
 from typing import Callable
-import sys
-sys.path.append("..")
-from shared.utils import load_int_data_frame_from_file, bit_list_to_number
+from src.shared.utils import load_int_data_frame_from_file, bit_list_to_number
 
 
 ComparerFunc = Callable[[int, int], bool]
@@ -13,7 +11,7 @@ class RatingCalculator:
     def __init__(self, comparer_func: ComparerFunc):
         self.comparer_func = comparer_func
 
-    def calculate_rating(self, df_all_values: pd.DataFrame,) -> int:
+    def calculate_rating(self, df_all_values: pd.DataFrame) -> int:
         df_filtered = self._filter_data_frame(df_all_values, 0)
         bit_list = df_filtered.values.tolist()[0]
         return bit_list_to_number(bit_list)

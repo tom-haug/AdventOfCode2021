@@ -1,7 +1,5 @@
-import sys
 from day01_common import reduce_three_measurement_sum, count_increasing_items
-sys.path.append("..")
-from shared.utils import load_int_list_from_file
+from src.shared.utils import load_int_list_from_file
 
 
 def get_part_two_result(file_name: str):
