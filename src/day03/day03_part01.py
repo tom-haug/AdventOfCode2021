@@ -1,5 +1,4 @@
-import sys
-from src.shared.utils import load_text_file
+from src.shared.utils import load_text_file, bitwise_not
 
 
 def get_part_one_result(file_name: str):
@@ -20,10 +19,6 @@ def get_part_one_result(file_name: str):
 
     result = gamma_value * epsilon_value
     return result
-
-
-def bitwise_not(n, numbits=8):
-    return (1 << numbits) - 1 - n
 
 
 if __name__ == "__main__":
