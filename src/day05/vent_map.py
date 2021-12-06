@@ -6,6 +6,8 @@ from src.shared.utils import load_text_file
 
 
 class VentMap:
+    DANGEROUS_VENT_THRESHOLD = 2
+
     def __init__(self, file_name: str, load_diagonal: bool):
         self._load_vents_from_file(file_name, load_diagonal)
 
@@ -41,6 +43,6 @@ class VentMap:
         dangerous_vent_count = 0
         for row in range(rows):
             for col in range(cols):
-                if df_vent_count[col][row] > 1:
+                if df_vent_count[col][row] >= self.DANGEROUS_VENT_THRESHOLD:
                     dangerous_vent_count += 1
         return dangerous_vent_count
