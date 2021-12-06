@@ -19,3 +19,7 @@ class TestDay03(unittest.TestCase):
     def test_part02(self):
         result = part02.get_part_two_result("input.txt")
         self.assertEqual(result, 3379326)
+
+
+if __name__ == "__main__":
+    unittest.main()
