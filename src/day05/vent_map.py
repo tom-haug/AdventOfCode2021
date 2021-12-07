@@ -3,6 +3,7 @@ import pandas as pd
 
 from src.shared.point import Point
 from src.shared.utils import load_text_file
+from src.shared.line import Line
 
 
 class VentMap:
@@ -12,7 +13,6 @@ class VentMap:
         self._load_vents_from_file(file_name, load_diagonal)
 
     def _load_vents_from_file(self, file_name: str, load_diagonal: bool):
-        from src.shared.line import Line
         self.vents: list[Line] = []
         self.map_bound_bottom_right = Point(0, 0)
         lines = load_text_file(file_name)
