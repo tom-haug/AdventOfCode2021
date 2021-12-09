@@ -6,7 +6,6 @@ def get_part_one_result(file_name: str) -> int:
     result = 0
     for line in file_contents:
         line_parts = line.split(" | ")
-        signal_patterns = line_parts[0]
         output_values = line_parts[1].split(" ")
         filtered_output = list(filter(lambda value: len(value) in [2, 3, 4, 7], output_values))
         result += len(filtered_output)
