@@ -2,7 +2,7 @@ import unittest
 from day06_common import get_fish_count_after_days
 
 
-class TestDay05(unittest.TestCase):
+class TestDay06(unittest.TestCase):
     def test_part01_sample01(self):
         result = get_fish_count_after_days("input_sample01.txt", 80)
         self.assertEqual(result, 5934)
