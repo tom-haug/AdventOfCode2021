@@ -2,13 +2,13 @@ from src.day11.flashing_system import FlashingSystem
 from src.shared.utils import load_int_nparray_from_file
 
 
-def get_part_one_result(file_name: str, num_steps: int) -> int:
+def get_part_two_result(file_name: str) -> int:
     octopuses = load_int_nparray_from_file(file_name)
     system = FlashingSystem(octopuses)
-    system.run_step_count(num_steps)
-    return system.flash_count
+    system.run_until_all_flash()
+    return system.step_num
 
 
 if __name__ == "__main__":
-    result = get_part_one_result("input.txt", 100)
+    result = get_part_two_result("input_sample01.txt")
     print(result)
