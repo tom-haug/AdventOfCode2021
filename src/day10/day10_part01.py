@@ -15,7 +15,7 @@ def get_part_one_result(file_name: str) -> int:
     chunks = load_chunks_from_file(file_name)
     total_points = 0
     for chunk in chunks:
-        valid, last_symbol = chunk.is_valid()
+        valid, last_symbol, _ = chunk.parse()
         if not valid:
             total_points += ILLEGAL_SYMBOL_POINTS[last_symbol]
     return total_points
@@ -24,8 +24,3 @@ def get_part_one_result(file_name: str) -> int:
 if __name__ == "__main__":
     result = get_part_one_result("input.txt")
     print(result)
-
-
-
-
-
