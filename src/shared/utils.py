@@ -1,5 +1,6 @@
 import os
 import sys
+
 import pandas as pd
 
 
@@ -30,3 +31,4 @@ def bit_list_to_number(bit_list: list[int]):
 
 def bitwise_not(number, num_bits):
     return (1 << num_bits) - 1 - number
+

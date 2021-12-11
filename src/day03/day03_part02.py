@@ -1,10 +1,8 @@
 import pandas as pd
 import operator
-from typing import Callable
+
+from src.shared.types import ComparerFunc
 from src.shared.utils import load_int_data_frame_from_file, bit_list_to_number
-
-
-ComparerFunc = Callable[[int, int], bool]
 
 
 class RatingCalculator:
