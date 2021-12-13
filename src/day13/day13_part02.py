@@ -87,18 +87,21 @@ def point_count(sheet: np.ndarray) -> int:
     return np.count_nonzero(sheet)
 
 
-def get_part_one_result(file_name: str):
+def get_part_two_result(file_name: str):
     points, folds = load_structures_from_file(file_name)
     sheet = build_sheet(points)
-    print(sheet)
+    # print(sheet)
     for fold in folds:
         sheet = fold_sheet(sheet, fold)
-        print(sheet)
-        break
-    result = point_count(sheet)
-    return result
+        # print(sheet)
+        # break
+
+    sheet = np.fliplr(sheet)
+    return sheet
 
 
 if __name__ == "__main__":
-    result = get_part_one_result("input.txt")
+    result = get_part_two_result("input.txt")
     print(result)
+
+# 98 wrong
