@@ -1,5 +1,5 @@
 import os
-import sys
+import __main__
 
 import numpy as np
 import pandas as pd
@@ -20,11 +20,9 @@ def load_int_nparray_from_file(file_name: str) -> np.ndarray:
     return np.array([[int(x) for x in list(line)] for line in file_contents])
 
 
-def load_text_file(file_name: str) -> list[str]:
-    file_path = os.path.join(sys.path[0], file_name)
-    f = open(file_path, "r")
-    file_contents = f.read()
-    f.close()
+def load_text_file(file_path: str) -> list[str]:
+    with open(file_path, "r") as f:
+        file_contents = f.read()
     return file_contents.splitlines()
 
 

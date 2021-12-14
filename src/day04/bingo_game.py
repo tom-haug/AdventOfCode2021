@@ -1,7 +1,8 @@
-from src.shared.utils import load_text_file
 import pandas as pd
 from abc import ABC, abstractmethod
-from bingo_board import BingoBoard
+
+from src.shared.utils import load_text_file
+from src.day04.bingo_board import BingoBoard
 
 
 class BingoGame(ABC):

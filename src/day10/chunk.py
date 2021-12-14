@@ -1,7 +1,7 @@
 from typing import Deque
+from collections import deque
 
 from src.day10.symbols import Symbol, OPENING_SYMBOLS, CLOSING_SYMBOLS, compatible_symbols
-from collections import deque
 
 
 class Chunk:
