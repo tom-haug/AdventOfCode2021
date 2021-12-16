@@ -2,7 +2,7 @@ from src.day14.part01 import get_part_one_result
 from src.day14.part02 import get_part_two_result
 
 
-class TestDay13:
+class TestDay14:
     def test_part01_sample01(self):
         result = get_part_one_result("src/day14/input_sample01.txt", 10)
         assert result == 1588

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "4732a227934a5440110fbd2b185204587e80de41b7b6c32bc654f14d41a9c010"
+            "sha256": "6eda949908c0bce449180a63a0bf1f0866484ddc4720caf4c845138c4be22153"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -16,6 +16,13 @@
         ]
     },
     "default": {
+        "astar-python": {
+            "hashes": [
+                "sha256:a6b3f149b5b7ecb8db2411f778c4ddf2f1ed65423bf754bf0d4db243aed52506"
+            ],
+            "index": "pypi",
+            "version": "==0.1.0"
+        },
         "atomicwrites": {
             "hashes": [
                 "sha256:6d1784dea7c0c8d4a5172b6c620f40b6e4cbfdf96d783691f2e1302a7b88e197",
@@ -137,6 +144,14 @@
             ],
             "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'",
             "version": "==1.11.0"
+        },
+        "pyastar": {
+            "hashes": [
+                "sha256:60ba67ce5b2a1514fbc6421d48c36b173ae739a57aeb6b5becd2779a41ee9485",
+                "sha256:be9b1d32aa22a1bed78bb2e6fd1a3a864ba572791039778d64c133da2f8819b9"
+            ],
+            "index": "pypi",
+            "version": "==0.1"
         },
         "pyparsing": {
             "hashes": [
