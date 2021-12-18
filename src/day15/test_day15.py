@@ -12,7 +12,7 @@ class TestDay15:
         result = process("src/day15/input.txt", 1)
         assert result == 595
 
-    def test_part01_sample02(self):
+    def test_part02_sample01(self):
         result = process("src/day15/input_sample01.txt", 5)
         assert result == 315
 
