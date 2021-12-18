@@ -1,5 +1,7 @@
 import os
 import __main__
+from enum import Enum
+from math import log2
 
 import numpy as np
 import pandas as pd
@@ -43,3 +45,18 @@ def middle_item(items: list) -> int:
         raise Exception("cannot get middle item for an even number of items")
     middle_index = int((length - 1) / 2)
     return items[middle_index]
+
+
+class NumberSystem(Enum):
+    BINARY = 2
+    DECIMAL = 10
+    HEXADECIMAL = 26
+
+
+def to_binary(value: str, number_base: NumberSystem) -> str:
+    binary_string = ""
+    bits_per_digit = int(log2(number_base.value))
+    for char in value:
+        binary_char_value = bin(int(char, number_base.value))[2:].zfill(bits_per_digit)
+        binary_string += binary_char_value
+    return binary_string
