@@ -1,7 +1,8 @@
 import pytest
 
-from src.day18.part01 import get_part_one_result
+from src.day18.part01 import *
 from src.day18.part02 import *
+from src.day18.common import *
 from src.shared.utils import noop
 
 
@@ -28,7 +29,7 @@ class TestDay17:
     def test_explode_success(self, input_statement: str, result_statement: str):
         statement = SnailStatement(input_statement, noop)
 
-        result = search_and_explode(statement)
+        result = statement.try_explode()
 
         assert result is True
         assert str(statement) == result_statement
@@ -40,7 +41,7 @@ class TestDay17:
     def test_split_success(self, input_statement: str, result_statement: str):
         statement = SnailStatement(input_statement, noop)
 
-        result = search_and_split(statement)
+        result = statement.try_split()
 
         assert result is True
         assert str(statement) == result_statement
