@@ -1,5 +1,5 @@
 from src.day01.common import count_increasing_items
-from src.shared.utils import load_int_list_from_file
+from src.shared import load_int_list_from_file
 
 
 def get_part_one_result(file_name: str):

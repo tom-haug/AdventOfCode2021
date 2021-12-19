@@ -1,5 +1,5 @@
 import numpy as np
-from src.shared.utils import load_text_file
+from src.shared import load_text_file
 
 
 def load_state_from_file(file_name: str) -> np.ndarray:

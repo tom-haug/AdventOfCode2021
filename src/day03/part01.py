@@ -1,4 +1,4 @@
-from src.shared.utils import load_text_file, bitwise_not
+from src.shared import load_text_file, bitwise_not
 
 
 def get_part_one_result(file_name: str):

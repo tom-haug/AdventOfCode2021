@@ -1,4 +1,4 @@
-from src.shared.utils import load_text_file
+from src.shared import load_text_file
 
 
 def get_part_one_result(file_name: str) -> int:

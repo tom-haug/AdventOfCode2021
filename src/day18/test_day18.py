@@ -3,7 +3,7 @@ import pytest
 from src.day18.part01 import *
 from src.day18.part02 import *
 from src.day18.common import *
-from src.shared.utils import noop
+from src.shared import noop
 
 
 class TestDay17:

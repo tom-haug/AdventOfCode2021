@@ -1,5 +1,5 @@
 from src.day12.cave_node import CaveNode
-from src.shared.utils import load_text_file
+from src.shared import load_text_file
 
 
 class CaveNodeSystem:

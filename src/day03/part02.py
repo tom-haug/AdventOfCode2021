@@ -1,8 +1,7 @@
 import pandas as pd
 import operator
 
-from src.shared.types import ComparerFunc
-from src.shared.utils import load_int_data_frame_from_file, bit_list_to_number
+from src.shared import ComparerFunc, load_int_data_frame_from_file, bit_list_to_number
 
 
 class RatingCalculator:

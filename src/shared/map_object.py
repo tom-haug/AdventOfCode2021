@@ -1,6 +1,6 @@
 from typing import TypeVar, Generic
 from attr import dataclass
-from src.shared.point import Point
+from src.shared import Point
 
 T = TypeVar('T')
 

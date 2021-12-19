@@ -1,23 +1,18 @@
+from __future__ import annotations
+
 import math
-from enum import Enum
 from typing import Callable, Optional
+
+from src.day18.base_classes import Explodable, Splittable
+from src.shared import Direction
 
 OnExplode = Callable[['SnailStatement', Optional[int], Optional[int]], None]
 
 
-class Direction(Enum):
-    LEFT = 1
-    RIGHT = 2
-
-
-def exploding_criteria(statement: 'SnailStatement', depth: int): return statement.children_literal and depth > 3
-def splitting_criteria(statement: 'SnailStatement', _): return statement.is_literal and statement.literal_value >= 10
-
-
-class SnailStatement:
+class SnailStatement(Explodable, Splittable):
     literal_value: Optional[int]
-    left_child: Optional['SnailStatement']
-    right_child: Optional['SnailStatement']
+    left_child: Optional[SnailStatement]
+    right_child: Optional[SnailStatement]
 
     def __init__(self, statement_text: str, on_explode: OnExplode):
         self.literal_value = None
@@ -25,6 +20,14 @@ class SnailStatement:
         self.right_child = None
         self.on_explode = on_explode
         self.parse(statement_text)
+
+    @staticmethod
+    def exploding_criteria(statement: SnailStatement, depth: int) -> bool:
+        return statement.children_literal and depth > 3
+
+    @staticmethod
+    def splitting_criteria(statement: SnailStatement, _):
+        return statement.is_literal and statement.literal_value >= 10
 
     @property
     def is_literal(self) -> bool:
@@ -55,7 +58,7 @@ class SnailStatement:
             self.left_child = SnailStatement(left_statement_text, self.propigate_explosion)
             self.right_child = SnailStatement(right_statement_text, self.propigate_explosion)
 
-    def __add__(self, other: 'SnailStatement') -> 'SnailStatement':
+    def __add__(self, other: SnailStatement) -> SnailStatement:
         result = SnailStatement("[]", self.on_explode)
         result.left_child = self
         result.right_child = other
@@ -71,21 +74,7 @@ class SnailStatement:
             right_repr = str(self.right_child)
             return f"[{left_repr},{right_repr}]"
 
-    def try_explode(self) -> bool:
-        found_statement = self._recursive_search(0, exploding_criteria)
-
-        if found_statement is not None:
-            found_statement._explode()
-            return True
-
-    def try_split(self) -> bool:
-        found_statement = self._recursive_search(0, splitting_criteria)
-
-        if found_statement is not None:
-            found_statement._split()
-            return True
-
-    def _explode(self):
+    def explode(self):
         if not self.children_literal:
             raise Exception(f"Cannot explode statement: {str(self)}")
 
@@ -96,7 +85,7 @@ class SnailStatement:
         self.right_child = None
         self.on_explode(self, left_value, right_value)
 
-    def _split(self):
+    def split(self):
         if not self.is_literal:
             raise Exception(f"Cannot split: {str(self)}")
         left_value = math.floor(self.literal_value / 2.0)
@@ -117,7 +106,7 @@ class SnailStatement:
             case Direction.RIGHT:
                 self.left_child.send_explosion(value, send_direction)
 
-    def propigate_explosion(self, from_statement: 'SnailStatement', left_value: int = None, right_value: int = None):
+    def propigate_explosion(self, from_statement: SnailStatement, left_value: int = None, right_value: int = None):
         if from_statement == self.left_child and left_value is not None:
             self.on_explode(self, left_value, None)
         if from_statement == self.left_child and right_value is not None:
@@ -127,7 +116,7 @@ class SnailStatement:
         if from_statement == self.right_child and left_value is not None:
             self.left_child.send_explosion(left_value, Direction.LEFT)
 
-    def _recursive_search(self, current_depth: int, search_criteria: Callable[['SnailStatement', int], bool]) -> 'SnailStatement':
+    def _recursive_search(self, current_depth: int, search_criteria: Callable[[SnailStatement, int], bool]) -> SnailStatement:
         if search_criteria(self, current_depth):
             return self
 

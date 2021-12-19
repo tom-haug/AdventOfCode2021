@@ -1,5 +1,4 @@
-from src.shared.map_object import MapObject
-from src.shared.point import Point
+from src.shared import MapObject, Point
 
 
 class Basin:

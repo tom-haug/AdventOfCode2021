@@ -1,4 +1,4 @@
-from src.shared.linked_node import LinkedNode
+from src.shared import LinkedNode
 
 
 START_LABEL = "start"

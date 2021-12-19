@@ -1,6 +1,6 @@
 from src.day10.chunk import Chunk
 from src.day10.symbols import ILLEGAL_SYMBOL_POINTS
-from src.shared.utils import load_text_file
+from src.shared import load_text_file
 
 
 def load_chunks_from_file(file_name: str) -> list[Chunk]:

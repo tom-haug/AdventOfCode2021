@@ -1,4 +1,4 @@
-from src.shared.point import Point
+from .point import Point
 
 
 class Line:

@@ -1,5 +1,5 @@
 from src.day17.common import load_target_from_file, get_max_y_velocity
-from src.shared.square import Square
+from src.shared import Square
 
 
 def get_part_one_result(file_name: str) -> int:

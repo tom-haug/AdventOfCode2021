@@ -1,6 +1,6 @@
 from src.day10.chunk import Chunk
 from src.day10.symbols import Symbol, completion_points
-from src.shared.utils import load_text_file, middle_item
+from src.shared import load_text_file, middle_item
 
 
 def load_chunks_from_file(file_name: str) -> list[Chunk]:

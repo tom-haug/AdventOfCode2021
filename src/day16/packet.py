@@ -2,7 +2,7 @@ import functools
 from collections import deque
 from enum import Enum
 
-from src.shared.utils import to_binary, NumberSystem
+from src.shared import to_binary, NumberSystem
 
 
 class PacketType(Enum):

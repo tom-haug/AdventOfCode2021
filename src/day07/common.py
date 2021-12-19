@@ -1,5 +1,5 @@
 from typing import Callable
-from src.shared.utils import load_text_file
+from src.shared import load_text_file
 
 
 FuelCostCalculation = Callable[[int, int], int]

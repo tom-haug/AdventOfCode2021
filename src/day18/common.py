@@ -1,7 +1,5 @@
-from typing import Callable
-
 from src.day18.snail_statement import SnailStatement
-from src.shared.utils import load_text_file
+from src.shared import load_text_file
 
 
 def add_statements(statements: list[SnailStatement]) -> SnailStatement:

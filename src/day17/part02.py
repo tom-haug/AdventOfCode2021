@@ -1,5 +1,4 @@
-from src.shared.point import Point
-from src.shared.square import Square
+from src.shared import Point, Square
 from src.day17.common import load_target_from_file, get_max_y_velocity
 
 
