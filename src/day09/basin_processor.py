@@ -2,8 +2,7 @@ import operator
 import numpy as np
 
 from src.day09.basin import Basin
-from src.shared.point import Point
-from src.shared.types import ComparerFunc
+from src.shared import ComparerFunc, Point
 
 
 class BasinProcessor:

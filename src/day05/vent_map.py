@@ -1,9 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from src.shared.point import Point
-from src.shared.utils import load_text_file
-from src.shared.line import Line
+from src.shared import Line, Point, load_text_file
 
 
 class VentMap:

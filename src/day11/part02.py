@@ -1,5 +1,5 @@
 from src.day11.flashing_system import FlashingSystem
-from src.shared.utils import load_int_nparray_from_file
+from src.shared import load_int_nparray_from_file
 
 
 def get_part_two_result(file_name: str) -> int:

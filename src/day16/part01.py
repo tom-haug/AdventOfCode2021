@@ -1,5 +1,5 @@
 from src.day16.packet import Packet
-from src.shared.utils import load_text_file, NumberSystem
+from src.shared import load_text_file, NumberSystem
 
 
 def get_part_one_result(file_name: str):

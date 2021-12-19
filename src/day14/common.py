@@ -2,7 +2,7 @@ import collections
 
 from src.day14.polymer_formula import PolymerFormulaCollection, PolymerFormula
 from src.day14.polymer_pair import PolymerPair, PolymerPairCollection
-from src.shared.utils import load_text_file
+from src.shared import load_text_file
 
 
 def process(file_name: str, step_count: int):

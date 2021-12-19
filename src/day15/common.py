@@ -4,7 +4,7 @@ import numpy as np
 from src.pyastar.interface import astar_graph
 from src.pyastar.util.graph import WeightedGraph
 
-from src.shared.utils import load_int_nparray_from_file
+from src.shared import load_int_nparray_from_file
 
 
 def process(file_name: str, matrix_multiplication_factor: int) -> int:

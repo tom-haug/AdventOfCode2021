@@ -1,7 +1,7 @@
 from src.day08.digit_definitions import DigitDefinition
 from src.day08.display_segment import DisplaySegment
 from src.day08.display_segment_processor import DisplaySegmentProcessor
-from src.shared.utils import load_text_file
+from src.shared import load_text_file
 
 
 def get_part_two_result(file_name: str) -> int:

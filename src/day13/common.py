@@ -2,8 +2,7 @@ import numpy as np
 from enum import Enum
 from attr import dataclass
 
-from src.shared.point import Point
-from src.shared.utils import load_text_file
+from src.shared import load_text_file, Point
 
 
 class FoldDirection(Enum):

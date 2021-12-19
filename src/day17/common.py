@@ -1,6 +1,4 @@
-from src.shared.point import Point
-from src.shared.square import Square
-from src.shared.utils import load_text_file
+from src.shared import load_text_file, Point, Square
 
 
 def load_target_from_file(file_name: str) -> Square:
