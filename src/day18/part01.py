@@ -176,13 +176,13 @@ def load_statements_from_file(file_name: str):
     lines = load_text_file(file_name)
     statements = [SnailStatement(line, lambda *_: None) for line in lines]
     master_statement = add_statements(statements)
-    magnitude = master_statement.magnitude
-    return magnitude
+    return master_statement
 
 
 def get_part_one_result(file_name: str) -> int:
     master_statement = load_statements_from_file(file_name)
-    print(master_statement)
+    magnitude = master_statement.magnitude
+    return magnitude
 
 
 if __name__ == "__main__":

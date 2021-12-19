@@ -60,3 +60,6 @@ def to_binary(value: str, number_base: NumberSystem) -> str:
         binary_char_value = bin(int(char, number_base.value))[2:].zfill(bits_per_digit)
         binary_string += binary_char_value
     return binary_string
+
+
+def noop(*_): return None

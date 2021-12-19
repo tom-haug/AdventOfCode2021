@@ -1,19 +1,17 @@
 import copy
-import functools
 import math
 from enum import Enum
 from typing import Callable, Optional
 
-from attr import dataclass
-
-from src.day17.common import load_target_from_file, get_max_y_velocity
 from src.shared.utils import load_text_file
 
 OnExplode = Callable[['SnailStatement', Optional[int], Optional[int]], None]
 
+
 class Direction(Enum):
     LEFT = 1
     RIGHT = 2
+
 
 class SnailStatement:
     literal_value: Optional[int]
@@ -26,7 +24,6 @@ class SnailStatement:
         self.right_child = None
         self.on_explode = on_explode
         self.parse(statement_text)
-
 
     def parse(self, statement_text: str):
         if statement_text[0] == "[":
@@ -56,7 +53,6 @@ class SnailStatement:
             return self.literal_value
         else:
             return (self.left_child.magnitude * 3) + (self.right_child.magnitude * 2)
-
 
     def __add__(self, other: 'SnailStatement') -> 'SnailStatement':
         result = SnailStatement("[]", self.on_explode)
@@ -94,16 +90,16 @@ class SnailStatement:
         self.left_child = SnailStatement(f"[{str(left_value)}]", self.propigate_explosion)
         self.right_child = SnailStatement(f"[{str(right_value)}]", self.propigate_explosion)
 
-    def send_explosion(self, value: int, to_direction: Direction):
+    def send_explosion(self, value: int, send_direction: Direction):
         if self.is_literal:
             self.literal_value += value
             return
 
-        match to_direction:
+        match send_direction:
             case Direction.LEFT:
-                self.right_child.send_explosion(value, to_direction)
+                self.right_child.send_explosion(value, send_direction)
             case Direction.RIGHT:
-                self.left_child.send_explosion(value, to_direction)
+                self.left_child.send_explosion(value, send_direction)
 
     def propigate_explosion(self, from_statement: 'SnailStatement', left_value: int = None, right_value: int = None):
         if from_statement == self.left_child and left_value is not None:
@@ -114,11 +110,6 @@ class SnailStatement:
             self.on_explode(self, None, right_value)
         if from_statement == self.right_child and left_value is not None:
                 self.left_child.send_explosion(left_value, Direction.LEFT)
-
-@dataclass
-class SnailStatementAndDepth:
-    statement: SnailStatement
-    depth: int
 
 
 def get_separator_idx(statement_text: str) -> int:
@@ -144,25 +135,36 @@ def add_statements(statements: list[SnailStatement]) -> SnailStatement:
 
 
 def reduce_statement(statement: SnailStatement):
-    keep_going = True
-    def exploding_criteria(statement: SnailStatement, depth: int): return statement.children_literal and depth > 3
-    def splitting_criteria(statement: SnailStatement, _): return statement.is_literal and statement.literal_value >= 10
     while True:
-        statement_to_explode = recursive_search(statement, 0, exploding_criteria)
-        if statement_to_explode is not None:
-            statement_to_explode.statement.explode()
+        if search_and_explode(statement):
             continue
 
-        statement_to_split = recursive_search(statement, 0, splitting_criteria)
-        if statement_to_split is not None:
-            statement_to_split.statement.split()
+        if search_and_split(statement):
             continue
         break
 
 
-def recursive_search(statement: SnailStatement, current_depth: int, search_criteria: Callable[[SnailStatement, int], bool]) -> SnailStatementAndDepth:
+def search_and_explode(statement: SnailStatement):
+    def exploding_criteria(statement: SnailStatement, depth: int): return statement.children_literal and depth > 3
+    statement_to_explode = recursive_search(statement, 0, exploding_criteria)
+    if statement_to_explode is not None:
+        statement_to_explode.explode()
+        return True
+    return False
+
+
+def search_and_split(statement: SnailStatement):
+    def splitting_criteria(statement: SnailStatement, _): return statement.is_literal and statement.literal_value >= 10
+    statement_to_split = recursive_search(statement, 0, splitting_criteria)
+    if statement_to_split is not None:
+        statement_to_split.split()
+        return True
+    return False
+
+
+def recursive_search(statement: SnailStatement, current_depth: int, search_criteria: Callable[[SnailStatement, int], bool]) -> SnailStatement:
     if search_criteria(statement, current_depth):
-        return SnailStatementAndDepth(statement, current_depth)
+        return statement
 
     if not statement.is_literal:
         left_result = recursive_search(statement.left_child, current_depth + 1, search_criteria)
@@ -188,19 +190,19 @@ def find_max_magnitude(statements: list[SnailStatement]):
     return max_magnitude
 
 
-def load_statements_from_file(file_name: str):
+def load_statements_from_file(file_name: str) -> list[SnailStatement]:
     lines = load_text_file(file_name)
     statements = [SnailStatement(line, lambda *_: None) for line in lines]
+    return statements
+
+
+def get_part_two_result(file_name: str) -> int:
+    statements = load_statements_from_file(file_name)
     magnitude = find_max_magnitude(statements)
     return magnitude
 
 
-def get_part_one_result(file_name: str) -> int:
-    master_statement = load_statements_from_file(file_name)
-    print(master_statement)
-
-
 if __name__ == "__main__":
-    result = get_part_one_result("src/day18/input.txt")
+    result = get_part_two_result("src/day18/input.txt")
     print(result)
 
