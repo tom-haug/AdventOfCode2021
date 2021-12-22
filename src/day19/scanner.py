@@ -6,15 +6,11 @@ from src.day19.beacon import Beacon, RelativeDirection
 class Scanner:
     def __init__(self, id: int):
         self.id: int = id
-        self._beacons: list[Beacon] = []
-
-    @property
-    def beacons(self):
-        return self._beacons
+        self.beacons: list[Beacon] = []
 
     def rotated_beacons_view(self, direction: RelativeDirection, xy_rotation: int) -> list[Beacon]:
         new_beacons: list[Beacon] = []
-        for beacon in self._beacons:
+        for beacon in self.beacons:
             new_beacon = Beacon(beacon.x, beacon.y, beacon.z)
             new_beacon.rotate_relative_direction(direction)
             new_beacon.rotate_xy(xy_rotation)
@@ -22,11 +18,11 @@ class Scanner:
         return new_beacons
 
     def beacon_exists(self, beacon: Beacon):
-        return len([x for x in self._beacons if x == beacon]) > 0
+        return len([x for x in self.beacons if x == beacon]) > 0
 
     def append_beacon(self, beacon: Beacon):
         if not self.beacon_exists(beacon):
-            self._beacons.append(beacon)
+            self.beacons.append(beacon)
             self._calculate_distances_to_beacon(beacon)
 
     def _calculate_distances_to_beacon(self, new_beacon: Beacon):
