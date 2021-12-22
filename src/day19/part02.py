@@ -1,4 +1,5 @@
 from __future__ import annotations
+import time
 
 from src.day19.common import load_scanners_from_file, combine_scanners
 from src.shared import Point3D
@@ -25,5 +26,9 @@ def calculate_furthest_manhattan_distance(scanner_locations: list[Point3D]) -> i
 
 
 if __name__ == "__main__":
+    start = time.time()
     result = get_part_two_result("src/day19/input.txt")
+    end = time.time()
+
+    print(f"Running Time: {end - start}")
     print(result)
