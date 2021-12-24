@@ -6,7 +6,7 @@ from src.day18.common import *
 from src.shared import noop
 
 
-class TestDay17:
+class TestDay18:
     def test_load_statements_from_file(self):
         statements = load_statements_from_file("src/day18/test_data/input_load_from_file01.txt")
 
