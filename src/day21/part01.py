@@ -1,44 +1,39 @@
 from __future__ import annotations
 import time
+from itertools import cycle
+from typing import Generator
+from src.day21.common import load_data_structures_from_file
+from src.day21.game import Game
 
-from attr import dataclass
-
-from src.shared import load_text_file
-
-@dataclass
-class Player:
-    position: int
-    score: int
+DIE_SIZE = 100
+DIE_ROLLS = 3
+NUM_GAME_POSITIONS = 10
+WINNING_SCORE = 1000
 
 
 def get_part_one_result(file_name: str) -> int:
     players = load_data_structures_from_file(file_name)
-    player_count = len(players)
-    cur_die_roll = -1
-    max_die_roll = 100
+    die_roller = DieRoller()
 
-    while True:
-        player_idx = ((cur_die_roll + 1) // 3) % player_count
-        player = players[player_idx]
-        for cur_die_roll in range(cur_die_roll + 1, cur_die_roll + 4):
-            player.position = (player.position + (cur_die_roll % max_die_roll) + 1) % 10
-        player.score += player.position + 1
-        if player.score >= 1000:
-            break
+    game = Game(NUM_GAME_POSITIONS, die_roller.roll_sum(), WINNING_SCORE)
+    game.play(players[0], players[1])
 
-    num_rolls = cur_die_roll + 1
-    loser = players[((num_rolls + 1) // 3) % player_count]
-    result = num_rolls * loser.score
-    return result
+    final_state = game.winning_state
+    total_die_rolls = die_roller.roll_count
+    losing_score = min(final_state.cur_player.score, final_state.other_player.score)
+
+    return losing_score * total_die_rolls
 
 
-def load_data_structures_from_file(file_name: str) -> list[Player]:
-    lines = load_text_file(file_name)
-    players: list[Player] = []
-    for line in lines:
-        player_position = int(line.split(":")[1].strip()) - 1
-        players.append(Player(player_position, 0))
-    return players
+class DieRoller:
+    def __init__(self):
+        self.roll_count = 0
+        self.roll_die = cycle(range(1, DIE_SIZE + 1))
+
+    def roll_sum(self) -> Generator[list[int], None, None]:
+        while True:
+            self.roll_count += 3
+            yield [sum(next(self.roll_die) for _ in range(DIE_ROLLS))]
 
 
 if __name__ == "__main__":
