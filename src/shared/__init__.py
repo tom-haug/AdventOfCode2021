@@ -5,6 +5,7 @@ from .linked_node import *
 from .map_object import *
 from .operators import *
 from .point import *
+from .rect_cuboid import *
 from .square import *
 from .type_converters import *
 from .utils import *
