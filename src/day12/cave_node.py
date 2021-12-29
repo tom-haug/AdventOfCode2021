@@ -10,11 +10,6 @@ class CaveNode(LinkedNode):
         return self.is_start or self.is_end
 
     @property
-    def linked_nodes(self) -> list['CaveNode']:
-        #  type error on next line I don't know how to get around, but it works
-        return self._linked_nodes
-
-    @property
     def is_start(self):
         return self.label == START_LABEL
 

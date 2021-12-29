@@ -12,8 +12,9 @@ class VentMap:
 
     def _load_vents_from_file(self, file_name: str, load_diagonal: bool):
         self.vents: list[Line] = []
-        self.map_bound_bottom_right = Point(0, 0)
         lines = load_text_file(file_name)
+        max_x = 0
+        max_y = 0
         for input_line in lines:
             line_parts = input_line.split(" -> ")
             coord1_parts = line_parts[0].split(",")
@@ -23,9 +24,10 @@ class VentMap:
             line = Line(point1, point2)
             if line.is_45_degree_angle() and not load_diagonal:
                 continue
-            self.map_bound_bottom_right.extend(point1.x, point1.y)
-            self.map_bound_bottom_right.extend(point2.x, point2.y)
+            max_x = max(max_x, point1.x, point2.x)
+            max_y = max(max_y, point1.y, point2.y)
             self.vents.append(line)
+        self.map_bound_bottom_right = Point(max_x, max_y)
 
     def get_vent_count_matrix(self) -> pd.DataFrame:
         vent_count_map = pd.DataFrame(np.zeros((self.map_bound_bottom_right.y + 1, self.map_bound_bottom_right.x + 1), dtype=int))
