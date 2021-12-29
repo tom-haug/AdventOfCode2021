@@ -2,7 +2,7 @@ from __future__ import annotations
 from attr import dataclass
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, repr=False)
 class Point:
     x: int
     y: int
@@ -12,6 +12,8 @@ class Point:
     #         self.x = new_x
     #     if new_y > self.y:
     #         self.y = new_y
+    def __repr__(self) -> str:
+        return f"(x: {self.x}, y: {self.y})"
 
     def adjacent_to(self, other: Point):
         delta_x = abs(self.x - other.x)
