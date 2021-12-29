@@ -1,6 +1,8 @@
 from __future__ import annotations
 from enum import Enum
 
+from attr import dataclass
+
 from src.shared import Point3D
 
 
@@ -13,7 +15,11 @@ class RelativeDirection(Enum):
     REVERSE = 5
 
 
-class Beacon(Point3D):
+@dataclass(eq=False)
+class Beacon:
+    x: int
+    y: int
+    z: int
     distances_to_other_beacons: list[float] = []
 
     def rotate_relative_direction(self, direction: RelativeDirection):
